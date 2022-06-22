@@ -16,20 +16,20 @@ frequencies_t = typing.Dict[str, float]
 
 
 def get_frequencies(fname: str) -> frequencies_t:
-    abs_f: frequencies_t = dict()
+    ret: frequencies_t = dict()
+    total = 0
     with open(fname, "rt") as f:
         while True:
             c = f.read(1)
             if not c:
                 break
             if c.isalpha():
+                total += 1
                 lower = c.lower()
-                abs_f[lower] = abs_f.get(lower, 0) + 1
-    total = sum(abs_f.values())
-    relative_f = dict()
-    for c, n in abs_f.items():
-        relative_f[c] = abs_f[c] / total
-    return relative_f
+                ret[lower] = ret.get(lower, 0) + 1
+    for c, n in ret.items():
+        ret[c] = n / total
+    return ret
 
 
 def plot_barchart(f: frequencies_t):
