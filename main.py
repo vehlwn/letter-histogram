@@ -53,6 +53,7 @@ def main():
         "--input",
         help="file name to be processed",
         type=_existing_file,
+        required=True,
     )
     parser.add_argument(
         "-j",
